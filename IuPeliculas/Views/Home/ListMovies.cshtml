@@ -1,0 +1,37 @@
+﻿@model IuPeliculas.Models.searchResult
+@if (Model.Response)
+{    
+    <div id="box">
+        @foreach (Movies item in Model.Search)
+        {
+            <div style="margin:5px;">
+                <div class="card" style="width: 16rem;">
+                    <img alt="Poster pelicula @Html.DisplayFor(modelItem => item.Title)" src="@Html.DisplayFor(modelItem => item.Poster)" align="left">
+                    <div class="row">
+                        <div class="col-11" style="margin:5px;">
+                            <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Title)</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7" style="margin:5px;">
+                            Año: @Html.DisplayFor(modelItem => item.Year)
+                        </div>
+                        <div class="col-3" style="margin:5px;">      
+                            @Html.ActionLink("Ver", "Detalle", "Home", new { id = item.imdbID })                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-danger" role="alert">
+                No se encontro ningún resultado.
+            </div>
+        </div>
+    </div>
+}

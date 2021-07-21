@@ -1,0 +1,21 @@
+﻿@model IuPeliculas.Models.Movies
+
+<br />
+<div class="jumbotron">
+   
+    <div class="row">
+        <div class="col-4">
+            <img class="img-responsive fit-image" src="@Model.Poster" align="left">
+        </div>
+        <div class="col-8">
+            <h1 class="display-4">@Model.Title</h1>
+            <p class="lead"><b>Year: </b> @Model.Year</p>
+            <p class="lead"><b>Actors:</b>  @Model.Actors</p>
+            <p class="lead><b>Gender:</b>  @Model.Genre</p>
+            <p class="lead"><b> Language:</b> @Model.Language</p>
+            <p class="lead"><b>Plot:</b> @Model.Plot</p>
+            <hr class="my-4">
+        </div>        
+    </div>
+
+</div>

@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<IuPeliculas.Models.Movies>
+
+<br />
+<div class="jumbotron">
+    <h1 class="display-4">Bienvenido!</h1>
+    <p class="lead">Aqui puedes encontrar tus peliculas.</p>
+    <hr class="my-4">
+    <div class="row">
+        <div class="col-8">
+            <input id="searchValue" name="searchValue" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+        </div>
+        <div class="col-2">
+            <select class="custom-select" id="searchType" disabled>
+                <option value="movie">Peliculas</option>
+                <option value="series">Series</option>
+            </select>
+        </div>
+
+        <div class="col-2">
+            <button class="btn btn-success my-2 my-sm-0" id="Search" >Buscar</button>
+        </div>
+    </div>
+
+</div>
+
+<div id="resultDiv">
+</div>
+
+<script>
+    $(document).ready(function () {
+        if ($("#searchValue").val().length > 0) {
+            $("#resultDiv").empty();
+            let searchValue = $("#searchValue").val();
+            let searchType = $("#searchType").val();
+            $.ajax({
+                url: "@Html.Raw(Url.Action("ListMovies", "Home"))",
+                data: { id: searchValue, name: searchType },
+                success: function (data) {
+                    $("#resultDiv").append(data);
+                }, error: function (data) {
+                    $("#notFound").show();
+                },
+            });
+        }
+
+        $("#Search").click(function () {
+            $("#resultDiv").empty();
+            let searchValue = $("#searchValue").val();
+            let searchType = $("#searchType").val();
+            $.ajax({
+                url: "@Html.Raw(Url.Action("ListMovies", "Home"))",
+                data: { id: searchValue, name: searchType },
+                success: function (data) {
+                    $("#resultDiv").append(data);
+                }, error: function (data) {
+                    $("#notFound").show();
+                },
+            });
+        });
+    });
+    function verDetalle(id) {
+        $.ajax({
+            url: "@Html.Raw(Url.Action("Detalle", "Home"))",
+            data: { id: id },
+            success: function (data) {
+             //   @Html.ActionLink("Detalle", "Home")
+            }, error: function (data) {
+                $("#notFound").show();
+            },
+        });
+    }
+</script>
